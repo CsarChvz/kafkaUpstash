@@ -26,7 +26,7 @@ async function consumeMessages() {
       const data = await axios.get(
         `https://alertas-expedientes-api-production.up.railway.app/busqueda?fecha=${parsedMessage.fecha}&exp=${parsedMessage.exp}&extracto=${parsedMessage.extracto}&cve_juz=${parsedMessage.cve_juz}`
       );
-        console.log(data.data);
+        console.log(data.data.id);
       
       // console.log(parsedMessage);
       // console.log(
