@@ -20,7 +20,7 @@ async function consumeMessages() {
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
       const parsedMessage = JSON.parse(message.value.toString());
-      console.log(parsedMessage);
+      console.log(parsedMessage.fecha);
       // console.log(
       //   `Recibido mensaje en ${topic}-${partition} | Offset: ${message.offset}, Valor: ${message.value}`
       // );
