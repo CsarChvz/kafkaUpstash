@@ -19,8 +19,10 @@ async function consumeMessages() {
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
-        // const data = await axios.get(`https://expedientes-alertas.vercel.app/api/cron/refresh`);
-        // console.log(data.data);
+        const data = await axios.get(
+          `https://expedientes-alertas.vercel.app/api/cron/try`
+        );
+        console.log(data.data);
       console.log(`Recibido mensaje en ${topic}-${partition} | Offset: ${message.offset}, Valor: ${message.value}`);
     },
   });
