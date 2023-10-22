@@ -11,23 +11,25 @@ const kafka = new Kafka({
   ssl: true,
 });
 
-const consumer = kafka.consumer({ groupId: "expedientes-busqueda" });
-
 async function consumeMessages() {
-  await consumer.connect();
-  await consumer.subscribe({ topic: "expedientes", fromBeginning: true });
+  try {
+    await consumer.connect();
+    await consumer.subscribe({ topic: "expedientes", fromBeginning: true });
 
-  await consumer.run({
-    eachMessage: async ({ topic, partition, message }) => {
-      const parsedMessage = JSON.parse(message.value.toString());
+    await consumer.run({
+      eachMessage: async ({ topic, partition, message }) => {
+        const parsedMessage = JSON.parse(message.value.toString());
 
-      await axios.post(
-        `https://alertas-expedientes-api-production.up.railway.app/busqueda?fecha=${parsedMessage.fecha}&exp=${parsedMessage.exp}&extracto=${parsedMessage.extracto}&cve_juz=${parsedMessage.cve_juz}`
-      );
+        await axios.post(
+          `https://alertas-expedientes-api-production.up.railway.app/busqueda?fecha=${parsedMessage.fecha}&exp=${parsedMessage.exp}&extracto=${parsedMessage.extracto}&cve_juz=${parsedMessage.cve_juz}`
+        );
 
-      console.log("Supuestamente actualizado");
-    },
-  });
+        console.log("Supuestamente actualizado");
+      },
+    });
+  } catch (error) {
+    console.error("Error en consumeMessages:", error);
+  }
 }
 
-consumeMessages().catch(console.error);
+consumeMessages();
