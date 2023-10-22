@@ -1,6 +1,13 @@
 const { Kafka } = require('kafkajs');
 const axios = require('axios');
 
+interface DatosExpediente {
+  fecha: Number;
+  exp: Number
+  cve_juz: String
+  extracto: String
+}
+
 const kafka = new Kafka({
     brokers: ['engaging-swan-10732-us1-kafka.upstash.io:9092'],
     sasl: {
@@ -19,11 +26,11 @@ async function consumeMessages() {
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
-      const parsedMessage = JSON.parse(message.value.toString());
+      const parsedMessage= JSON.parse(message.value.toString())
       console.log(parsedMessage.fecha);
-      // console.log(
-      //   `Recibido mensaje en ${topic}-${partition} | Offset: ${message.offset}, Valor: ${message.value}`
-      // );
+      console.log(
+        `Recibido mensaje en ${topic}-${partition} | Offset: ${message.offset}, Fecha: ${parsedMessage.fecha}, Exp: ${parsedMessage.exp}, Juzgado: ${parsedMessage.cve_juz}, Extracto: ${parsedMessage.extracto}`
+      );
     },
   });
 }
