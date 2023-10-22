@@ -19,9 +19,10 @@ async function consumeMessages() {
 
   await consumer.run({
     eachMessage: async ({ topic, partition, message }) => {
-        const data = await axios.get(
-          `https://expedientes-alertas.vercel.app/api/cron/try`
-        );
+      const parsedMessage = JSON.parse(message.value.toString());
+      const data = await axios.get(
+        `https://alertas-expedientes-api-production.up.railway.app/busqueda?fecha=${parsedMessage.fecha}&exp=${parsedMessage.exp}&extracto=${parsedMessage.extracto}&cve_juz=${parsedMessage.cve_juz}`
+      );
         console.log(data.data);
       console.log(`Recibido mensaje en ${topic}-${partition} | Offset: ${message.offset}, Valor: ${message.value}`);
     },
