@@ -11,6 +11,8 @@ const kafka = new Kafka({
   ssl: true,
 });
 
+const consumer = kafka.consumer({ groupId: "expedientes-busqueda" });
+
 async function consumeMessages() {
   try {
     await consumer.connect();
@@ -28,7 +30,7 @@ async function consumeMessages() {
       },
     });
   } catch (error) {
-    console.error("Error en consumeMessages:", error);
+    console.error("Error en consumeMessages-----------:", error);
   }
 }
 
