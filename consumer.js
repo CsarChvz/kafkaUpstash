@@ -26,7 +26,9 @@ async function consumeMessages() {
        await axios.post(
          `https://alertas-expedientes-api-production.up.railway.app/busqueda?fecha=${parsedMessage.fecha}&exp=${parsedMessage.exp}&extracto=${parsedMessage.extracto}&cve_juz=${parsedMessage.cve_juz}`
        );
-      
+        
+
+       console.log(new Date().toISOString(), parsedMessage);
     },
   });
 }
