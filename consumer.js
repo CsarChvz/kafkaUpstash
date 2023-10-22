@@ -1,12 +1,7 @@
 const { Kafka } = require('kafkajs');
 const axios = require('axios');
 
-interface DatosExpediente {
-  fecha: Number;
-  exp: Number
-  cve_juz: String
-  extracto: String
-}
+
 
 const kafka = new Kafka({
     brokers: ['engaging-swan-10732-us1-kafka.upstash.io:9092'],
