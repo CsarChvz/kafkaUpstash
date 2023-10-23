@@ -22,11 +22,10 @@ async function consumeMessages() {
       eachMessage: async ({ topic, partition, message }) => {
         const parsedMessage = JSON.parse(message.value.toString());
 
-        await axios.post(
+        await axios.patch(
           `https://alertas-expedientes-api-production.up.railway.app/busqueda?fecha=${parsedMessage.fecha}&exp=${parsedMessage.exp}&extracto=${parsedMessage.extracto}&cve_juz=${parsedMessage.cve_juz}&idExpediente=${parsedMessage.idExpediente}`
         );
 
-        console.log("Supuestamente actualizado");
       },
     });
   } catch (error) {
