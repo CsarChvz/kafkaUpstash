@@ -12,7 +12,7 @@ const kafka = new Kafka({
   })
 
 const consumer = kafka.consumer({ groupId: 'expedientes-busqueda' });
-
+  
 async function consumeMessages() {
   await consumer.connect();
   await consumer.subscribe({ topic: 'expedientes', fromBeginning: true });
