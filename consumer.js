@@ -28,10 +28,10 @@ async function consumeMessages() {
             `https://alertas-expedientes-api-production.up.railway.app/busqueda?fecha=${parsedMessage.fecha}&exp=${parsedMessage.exp}&extracto=${parsedMessage.extracto}&cve_juz=${parsedMessage.cve_juz}&idExpediente=${parsedMessage.idExpediente}`
           )
           .then((response) => {
-            console.log("Response", response);
+            console.log("Response");
           })
           .catch((error) => {
-            console.log("Error", error);
+            console.log("Error");
             if (!error.response) {
               // network error
               this.errorStatus = "Error: Network Error";
