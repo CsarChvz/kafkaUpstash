@@ -2,11 +2,11 @@ const { Kafka } = require("kafkajs");
 const axios = require("axios");
 
 const kafka = new Kafka({
-  brokers: ["legible-duck-7093-us1-kafka.upstash.io:9092"],
+  brokers: ["active-phoenix-9525-us1-kafka.upstash.io:9092"],
   sasl: {
     mechanism: "scram-sha-256",
-    username: "bGVnaWJsZS1kdWNrLTcwOTMk2kYRHkeNGLe30E2DWXiXNOUnLvlZBqDzzR3wO9o",
-    password: "MmFiNGJkNDQtYTliMi00ZmQ4LWIxYmUtMjk0ODQxNjM2YjFl",
+    username: "YWN0aXZlLXBob2VuaXgtOTUyNSQMuoRe8tWWNimpUlMFf65ZMGCZjTTBjPu9UJM",
+    password: "Zjg4NmJkZGMtM2ZkNC00MDMxLTljOTQtMjA5OTcxNTRlZDA4",
   },
   ssl: true,
 });
